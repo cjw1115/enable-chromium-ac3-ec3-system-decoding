@@ -44,3 +44,49 @@ Here is used full GN args, you can also use below args to build on your machine.
     proprietary_codecs=true
     enable_platform_ac3_eac3_audio  = true
     target_cpu = "x64"
+
+## How to verify if AC3,EC3 supported?
+### Media Capabilities API
+```javascript
+const audioConfiguration = {
+    type: "media-source",
+    audio: {
+      // for AC3, use 'ac-3'
+      // for EC3, use 'ec-3'
+      contentType: 'audio/mp4; codecs="ac-3"',
+      // spatialRendering is not supported by Chromium.
+      // This field will be ignored internally.
+      spatialRendering: true
+    },
+  };
+
+  navigator.mediaCapabilities
+    .decodingInfo(audioConfiguration)
+    .then((result) => {
+      console.log(
+        `Dolby AC3 is ${result.supported ? "" : "not "}supported,`
+      );
+    })
+    .catch(() => {
+      console.log(`decodingInfo error: ${contentType}`);
+    });
+```
+
+### MediaSource.isTypeSupported()
+```javascript
+// for AC3, use 'ac-3'
+// for EC3, use 'ec-3'
+if (MediaSource.isTypeSupported('audio/mp4; codecs="ac-3"')) {
+  console.log('Dolby AC3 is supported!');
+}
+```
+
+### HTMLMediaElement.canPlayType()
+```javascript
+// for AC3, use 'ac-3'
+// for EC3, use 'ec-3'
+let obj = document.createElement("video");
+if (obj.canPlayType('audio/mp4; codecs="ac-3"') === 'probably') {
+  console.log('Dolby AC3 is supported!');
+}
+```
