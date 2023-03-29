@@ -46,7 +46,9 @@ Here is used full GN args, you can also use below args to build on your machine.
     target_cpu = "x64"
 
 ## How to verify if AC3,EC3 supported?
-### Media Capabilities API
+
+### Verify with WEB API
+#### Media Capabilities API
 ```javascript
 const audioConfiguration = {
     type: "media-source",
@@ -72,7 +74,7 @@ const audioConfiguration = {
     });
 ```
 
-### MediaSource.isTypeSupported()
+#### MediaSource.isTypeSupported()
 ```javascript
 // for AC3, use 'ac-3'
 // for EC3, use 'ec-3'
@@ -81,7 +83,7 @@ if (MediaSource.isTypeSupported('audio/mp4; codecs="ac-3"')) {
 }
 ```
 
-### HTMLMediaElement.canPlayType()
+#### HTMLMediaElement.canPlayType()
 ```javascript
 // for AC3, use 'ac-3'
 // for EC3, use 'ec-3'
@@ -90,12 +92,19 @@ if (obj.canPlayType('audio/mp4; codecs="ac-3"') === 'probably') {
   console.log('Dolby AC3 is supported!');
 }
 ```
-### Test Content
+### Verify with test Content
 You can play below content on this readme page. If it can be play, means your browser support AC3/EC3 decoding.
-
 #### bear-eac3-only-frag
 https://user-images.githubusercontent.com/13924086/228438871-96a90b6e-7309-41e8-84ab-00f2d00a1f2c.mp4
 #### bear-ac3-only-frag
 https://user-images.githubusercontent.com/13924086/228438950-b67f8939-2d5b-4b13-babc-caeb31cd5c92.mp4
 
+### Verify with Process modules
+If on system decoding is working, the Dolby MFT will be loaded by chromium. You can use some tool to dump chromium loaded modules.
 
+Take listdll.exe as example: [Download listdll](https://learn.microsoft.com/en-us/sysinternals/downloads/listdlls)
+
+```bash
+listdll.exe chrome.exe
+```
+if module `C:\Windows\System32\DolbyDecMFT.dll` is loaded, it means Dolby AC3/EC3 decoding worked.
