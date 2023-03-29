@@ -104,6 +104,8 @@ Bilibili 在 Safari 上面支持 EC3， 如果你把 Chromium 的 UA 改成 Safa
 
 如果你有 Bilibili 账号，也可以用它测试。  
 
+UA 修改工具： [User-Agent Switcher and Manager](https://chrome.google.com/webstore/detail/user-agent-switcher-and-m/bhchdcejhohfmigjafbampogmaanbfkg)
+
 ### 通过进程内加载的模块验证
 如果系统级解码工作，那么杜比 MFT 会被 Chromium 加载，你可以通过一些工具来查看 Chromium 加载的所有模块。
 
