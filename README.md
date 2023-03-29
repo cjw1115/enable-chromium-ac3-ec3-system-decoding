@@ -90,3 +90,12 @@ if (obj.canPlayType('audio/mp4; codecs="ac-3"') === 'probably') {
   console.log('Dolby AC3 is supported!');
 }
 ```
+### Test Content
+You can play below content on this readme page. If it can be play, means your browser support AC3/EC3 decoding.
+
+#### bear-eac3-only-frag
+https://user-images.githubusercontent.com/13924086/228438871-96a90b6e-7309-41e8-84ab-00f2d00a1f2c.mp4
+#### bear-ac3-only-frag
+https://user-images.githubusercontent.com/13924086/228438950-b67f8939-2d5b-4b13-babc-caeb31cd5c92.mp4
+
+
