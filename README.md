@@ -29,7 +29,7 @@ Here is a sample GN args for build chromium:
 
 `enable_platform_ac3_eac3_audio` is a new build flag for controlling AC3,EC3 support on or off.
 
-## Release
+## [Releases](https://github.com/cjw1115/enable-chromium-ac3-ec3-system-decoding/releases)
 Since build chromium will spend much time, I attached a build from my machine to Github. You can download it and try this feature.
 Here is used full GN args, you can also use below args to build on your machine.
 
@@ -44,4 +44,3 @@ Here is used full GN args, you can also use below args to build on your machine.
     proprietary_codecs=true
     enable_platform_ac3_eac3_audio  = true
     target_cpu = "x64"
-
