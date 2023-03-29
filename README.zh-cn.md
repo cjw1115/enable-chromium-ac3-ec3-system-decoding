@@ -13,6 +13,7 @@ MediaFoundationAudioDecoder 用来在 Windows 调用外部解码器，杜比音�
 
 ## 编译一个带有 AC3/EC3 支持的 Chromium 版本
 目前为止，即使用来调用系统级 AC3/EC3 解码器的代码已经被合并入 Chromium，但是这些代码默认没有被启用。
+
 这儿是提交列表： [Add Dolby AC3, EC3 codec support on Windows Platform](https://chromium-review.googlesource.com/c/chromium/src/+/4116077)
 
 你必须手动开启编译选项 `enable_platform_ac3_eac3_audio ` 在你自己的编译环境里。
@@ -99,7 +100,7 @@ https://user-images.githubusercontent.com/13924086/228438871-96a90b6e-7309-41e8-
 #### bear-ac3-only-frag
 https://user-images.githubusercontent.com/13924086/228438950-b67f8939-2d5b-4b13-babc-caeb31cd5c92.mp4
 
-### 通过进程内记载的模块验证
+### 通过进程内加载的模块验证
 如果系统级解码工作，那么杜比 MFT 会被 Chromium 加载，你可以通过一些工具来查看 Chromium 加载的所有模块。
 
 用 listdll.exe 举个例子：[下载 listdll](https://learn.microsoft.com/en-us/sysinternals/downloads/listdlls)
