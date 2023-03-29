@@ -1,7 +1,7 @@
 # enable-chromium-ac3-ec3-system-decoding
 Enable system level decoding of Dolby AC3/EC3 in Chromium.
 
-##### English | [简体中文](./README.zh_cn.md)
+##### English | [简体中文](./README.zh-cn.md)
 
 ## Background
 AC3 and EC3 are Dolby's audio coding formats, it's Dolby's IP and can not be integrated into Chromium(ffmpeg).
