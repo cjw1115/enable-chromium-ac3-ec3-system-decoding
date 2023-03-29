@@ -99,6 +99,10 @@ if (obj.canPlayType('audio/mp4; codecs="ac-3"') === 'probably') {
 https://user-images.githubusercontent.com/13924086/228438871-96a90b6e-7309-41e8-84ab-00f2d00a1f2c.mp4
 #### bear-ac3-only-frag
 https://user-images.githubusercontent.com/13924086/228438950-b67f8939-2d5b-4b13-babc-caeb31cd5c92.mp4
+#### Bilibili 上面的杜比全景声
+Bilibili 在 Safari 上面支持 EC3， 如果你把 Chromium 的 UA 改成 Safari的，它同样可以在 Chromium 上提供 EC3 编码的音频。
+
+如果你有 Bilibili 账号，也可以用它测试。  
 
 ### 通过进程内加载的模块验证
 如果系统级解码工作，那么杜比 MFT 会被 Chromium 加载，你可以通过一些工具来查看 Chromium 加载的所有模块。

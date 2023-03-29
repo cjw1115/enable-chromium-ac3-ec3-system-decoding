@@ -101,6 +101,10 @@ https://user-images.githubusercontent.com/13924086/228438871-96a90b6e-7309-41e8-
 #### bear-ac3-only-frag
 https://user-images.githubusercontent.com/13924086/228438950-b67f8939-2d5b-4b13-babc-caeb31cd5c92.mp4
 
+#### Dolby Atmos content on bilibili
+bilibili supoorts stream EC3 content on Safari on macOS, if you change Chromium's user-agent to Safari's, it will stream EC3 content too.
+If you have bilibili account, you can try it.  
+
 ### Verify with Process modules
 If on system decoding is working, the Dolby MFT will be loaded by chromium. You can use some tool to dump chromium loaded modules.
 
