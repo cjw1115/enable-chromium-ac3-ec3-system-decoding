@@ -110,3 +110,6 @@ Take listdll.exe as example: [Download listdll](https://learn.microsoft.com/en-u
 listdll.exe chrome.exe
 ```
 if module `C:\Windows\System32\DolbyDecMFT.dll` is loaded, it means Dolby AC3/EC3 decoding worked.
+
+## Welcome issues
+If you have any problems when using this feature, please open an issue without hesitation! Thanks! 

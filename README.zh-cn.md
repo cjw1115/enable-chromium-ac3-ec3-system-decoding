@@ -109,3 +109,6 @@ https://user-images.githubusercontent.com/13924086/228438950-b67f8939-2d5b-4b13-
 listdll.exe chrome.exe
 ```
 如果模块 `C:\Windows\System32\DolbyDecMFT.dll` 被加载了，那么意味着杜比 AC3/EC3 解码正在工作。
+
+## 欢迎开 issues
+如果再使用过程中遇到任何问题，欢迎你随时开 issue, 感谢。
