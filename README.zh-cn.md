@@ -1,20 +1,28 @@
 # enable-chromium-ac3-ec3-system-decoding
-在 Chromium 里面为杜比 AC3/EC3 启用系统级解码。 AC3 就是 Dolby Digital, EC3 是 Dolby Digital Plus。 
+在 Chromium 里面为杜比 AC3/EC3 启用系统级解码 (目前支持 Windows + macOS)。 AC3 就是 Dolby Digital, EC3 是 Dolby Digital Plus。 
 
 ##### 简体中文 | [English](./README.md)
 
 ## 背景
-AC3 和 EC3 是杜比的音频编码格式，因为版权问题等不能直接集成解码器到 Chromium 里面（Chromium 使用 FFMPEG 解码）。
-在 Windows 上， 微软从 Windows 8 开始在系统镜像中自带杜比 AC3/EC3 的解码器，以 MFT 的形式存在。第三方可以手动调用这个解码器来解码杜比 AC3/EC3, Chromium 同样可以使用这种方式。 
+AC3 和 EC3 是杜比的音频编码格式，因为版权问题等不能直接集成解码器到 Chromium 里面（Chromium 使用 FFMPEG 解码 AAC/FLAC/WAV 等 Codec）。
+
+在 Windows 上，微软从 Windows 8 开始在系统镜像中自带杜比 AC3/EC3 的解码器，以 MFT 的形式存在。第三方可以手动调用这个解码器来解码杜比 AC3/EC3, Chromium 同样可以使用这种方式。 
+
+在 macOS 上，从 macOS 10.2 开始便支持了 AC3 格式的解码，从 macOS 10.11 开始支持了 EC3 格式的解码，利用 AudioToolbox + CoreAudio，第三方具备免版权风险的调用能力，Chromium 同样可以使用这种方式。
+
 ## Chromium 如何使用 AC3/EC3 MFT 解码器
-Chromium 默认使用 FFMPEG 作为它的音频解码器，与此同时，chromium 也使用基于 MOJO 的外部音频解码器，如果目标音频格式不被 FFMPEG 支持，Chromium 会尝试使用外部的解码器。
+Chromium 默认使用 FFMPEG 作为它的音频解码器，与此同时，Chromium 也使用基于 Mojo 的外部音频解码器，如果目标音频格式不被 FFMPEG 支持，Chromium 会尝试使用外部的解码器。
 
 MediaFoundationAudioDecoder 用来在 Windows 调用外部解码器，杜比音频解码器 MFT 会在其内部被选择使用。
+
+AudioToolboxAudioDecoder 用来在 macOS 调用系统解码器。
 
 ## 编译一个带有 AC3/EC3 支持的 Chromium 版本
 目前为止，即使用来调用系统级 AC3/EC3 解码器的代码已经被合并入 Chromium，但是这些代码默认没有被启用。
 
-这儿是提交列表： [Add Dolby AC3, EC3 codec support on Windows Platform](https://chromium-review.googlesource.com/c/chromium/src/+/4116077)
+这儿是提交列表：
+[Add Dolby AC3, EC3 codec support on Windows Platform](https://crbug.com/1402182)
+[Implement AC3 / E-AC3 audio codec support for macOS](https://crbug.com/1430808)
 
 你必须手动开启编译选项 `enable_platform_ac3_eac3_audio ` 在你自己的编译环境里。
 
@@ -30,7 +38,7 @@ MediaFoundationAudioDecoder 用来在 Windows 调用外部解码器，杜比音�
 `enable_platform_ac3_eac3_audio` 是一个新的编译选项，用来控制是否启用 AC3/EC3解码器。
 
 ## [Releases](https://github.com/cjw1115/enable-chromium-ac3-ec3-system-decoding/releases)
-因为编译 chromium 需要消耗比较长的时间，我在这个仓库的 Release 里面上传了我自己编译的版本，已经默认打开了支持 AC3/EC3 的编译选项。
+因为编译 Chromium 需要消耗比较长的时间，我在这个仓库的 Release 里面上传了我自己编译的版本，已经默认打开了支持 AC3/EC3 的编译选项。
 
 这是我用到的所有的 GN 编译参数，你可以用类似的参数来自己编译一个版本。
 
