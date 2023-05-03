@@ -6,23 +6,28 @@ Enable system level decoding of Dolby AC3/EC3 in Chromium (Windows and macOS onl
 ## Background
 AC3 and EC3 are Dolby's audio coding formats, it's Dolby's IP and can not be integrated into Chromium (Chromium use FFMPEG decode codec AAC/FLAC/WAV etc..).
 
-On Windows, since Windows 8, Microsoft preload AC3/EC3 decoder in windows image as MFT(Media Foundation Transform). Third party can use it to decode ac3/ec3 audio by load MFT manually. This gives us a chance to use it in Chromium. 
+#### Windows
+Since Windows 8, Microsoft preload AC3/EC3 decoder in windows image as MFT(Media Foundation Transform). Third party can use it to decode ac3/ec3 audio by load MFT manually. This gives us a chance to use it in Chromium. 
 
-On macOS, AC3 codec has been supported since macOS 10.2, and EC3 codec has been supported since macOS 10.11. Using AudioToolbox and CoreAudio, third party now have the ability to integrate the support without loyalty issue, and Chromium can also use this way to do the decoding job.
+#### MacOS
+AC3 codec has been supported since macOS 10.2, and EC3 codec has been supported since macOS 10.11. Using AudioToolbox and CoreAudio, third party now have the ability to integrate the support without loyalty issue, and Chromium can also use this way to do the decoding job.
 
-## How Chromium use AC3/EC3 MFT decoder
+## How Chromium use AC3/EC3 platform decoder
 Natively Chromium use FFMPEG as it's decoder factory. And Chromium also support Mojo Audio Decoder, if target format is not supported by FFMPEG, Chromium will try to find platfrom decoder, it's a kind of Mojo Audio Decoder.
 
+#### Windows
 MediaFoundationAudioDecoder is an implementation of Mojo Audio Decoder on Windows, Dolby Audio Decoder MFT will be selected by input audio format internally. 
 
+#### MacOS
 AudioToolboxAudioDecoder is also an implementation of Mojo Audio Decoder on macOS, it will use system decoder to do the decoding job.
 
 ## Build a custom Chromium with AC3/EC3 support
 Even if code for support AC3/EC3 playback integrated in Chromium, but all of them are disabled by default.
 
-Here is change list: 
-[Add Dolby AC3, EC3 codec support on Windows Platform](https://crbug.com/1402182)
-[Implement AC3 / E-AC3 audio codec support for macOS](https://crbug.com/1430808)
+Here are change lists:
+
+* [Add Dolby AC3, EC3 codec support on Windows Platform](https://crbug.com/1402182)
+* [Implement AC3 / E-AC3 audio codec support for macOS](https://crbug.com/1430808)
 
 You have to turn build flag `enable_platform_ac3_eac3_audio ` enabled on your custom build.
 
@@ -38,7 +43,8 @@ Here is a sample GN args for build Chromium:
 `enable_platform_ac3_eac3_audio` is a new build flag for controlling AC3,EC3 support on or off.
 
 ## [Releases](https://github.com/cjw1115/enable-chromium-ac3-ec3-system-decoding/releases)
-Since build chromium will spend much time, I attached a build from my machine to Github. You can download it and try this feature.
+Since build chromium will spend much time, We already created builds and attached them on Github. You can download them and try this feature.
+
 Here is used full GN args, you can also use below args to build on your machine.
 
     # Set build arguments here. See `gn help buildargs`.
@@ -114,7 +120,7 @@ If you have bilibili account, you can try it.
 
 Change your user-agent: [User-Agent Switcher and Manager](https://chrome.google.com/webstore/detail/user-agent-switcher-and-m/bhchdcejhohfmigjafbampogmaanbfkg)
 
-### Verify with Process modules
+### Verify with Process modules(Windows only)
 If on system decoding is working, the Dolby MFT will be loaded by Chromium. You can use some tool to dump Chromium loaded modules.
 
 Take listdll.exe as example: [Download listdll](https://learn.microsoft.com/en-us/sysinternals/downloads/listdlls)
